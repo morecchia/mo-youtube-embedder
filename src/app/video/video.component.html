@@ -1,6 +1,13 @@
-<div class="player-fullsize" [ngClass]="{'playing': videoId}">
-    <div class="player-controls">
-        <button type="button" class="btn-close" aria-label="Close" (click)="closePlayer()"></button>
-    </div>
-    <div id="player" [ngClass]="{'playing': videoId}"></div>
+<div class="player-fullsize" [ngClass]="{ playing: videoId }">
+  <div class="player-controls">
+    <button
+      type="button"
+      class="btn-close btn-close-white"
+      aria-label="Close"
+      (click)="closePlayer()">
+    </button>
+  </div>
+  <!-- placeholder for youtube iframe -->
+  <div id="player"></div>
+  <!-- do not remove -->
 </div>
