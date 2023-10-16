@@ -19,10 +19,5 @@ export class ListComponent {
 
   selectVideo(video: any) {
     this.searchService.selectItem(video);
-    window.scroll({ 
-      top: 0, 
-      left: 0, 
-      behavior: 'smooth' 
-    });
   }
 }
