@@ -1,0 +1,11 @@
+<div class="wrapper">
+  <ul class="list-group w-75">
+    <li *ngFor="let video of videos$ | async" (click)="selectVideo(video)" class="list-group-item d-flex justify-content-between align-items-start">
+      <img [src]="video.thumbnail.thumbnails[0].url">
+      <div class="ms-2 me-auto">
+        <div class="fw-bold"><span>{{video.title}}</span></div>
+        {{video.channelTitle}}
+      </div>
+    </li>
+  </ul>  
+</div>

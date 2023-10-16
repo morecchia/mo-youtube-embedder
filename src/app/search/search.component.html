@@ -1,0 +1,7 @@
+<div class="wrapper">
+    <div class="row video-form">
+        <label for="videoId" class="form-label">Search for a Youtube video</label>
+        <input id="videoId" class="form-control" type="text" [formControl]="term">
+        <button id="videoSubmit" class="btn btn-primary" type="button" (click)="getVideos()">Submit</button>
+    </div>
+</div>

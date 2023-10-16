@@ -1,0 +1,25 @@
+.player-fullsize {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: #fafafa;
+}
+
+.playing {
+  display: flex;
+}
+
+.player-controls {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  color: #6a6a6a;
+  padding: 18px;
+  font-size: 20px;
+}
