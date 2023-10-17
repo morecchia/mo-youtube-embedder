@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormControl} from '@angular/forms';
 
-import { SearchService } from '../search.service';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-search',

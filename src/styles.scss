@@ -1,44 +1,18 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    color: #fafafa;
-    background: #555;
-    height: 100vh;
-  }
-  
-  .wrapper {
-    display: flex;
-    margin: 1em;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .placeholder-wrapper, #playerPlaceholder {
-    width: 900px;
-    height: 600px;
-    position: relative;
-  }
-  
-  .placeholder-wrapper {
-    position: relative;
-  }
-   
-  #playerPlaceholder {
-    background: #666;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  
-  .video-form > * {
-    margin-bottom: 4px;
-  }
-  
-  .video-form label {
-    text-align: center;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: #fafafa;
+  background: #555;
+  height: 100vh;
+}
+
+.wrapper {
+  display: flex;
+  margin: 1em;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { VideoService } from '../video.service';
+import { VideoService } from '../../services/video.service';
 import { Serializer } from '@angular/compiler';
-import { SearchService } from '../search.service';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-video',
@@ -29,5 +29,9 @@ export class VideoComponent implements OnInit {
   closePlayer() {
     this.videoId = null;
     this.videoService.stop();
+  }
+
+  hidePlayer() {
+    this.videoId = null;
   }
 }

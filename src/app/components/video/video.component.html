@@ -1,0 +1,22 @@
+<div class="player-backdrop" [ngClass]="{ playing: videoId }">
+  <div class="player-container">
+    <div class="player-controls">
+      <a title="Back to search"
+        type="button"
+        class="btn btn-outline-light btn-back"
+        aria-label="Hide"
+        (click)="hidePlayer()">
+        &#8676;
+      </a>
+      <a title="Close player"
+        type="button"
+        class="btn-close btn-close-white"
+        aria-label="Close"
+        (click)="closePlayer()">
+      </a>
+    </div>
+    <!-- placeholder for youtube iframe -->
+    <div id="player"></div>
+    <!-- do not remove -->
+  </div>
+</div>

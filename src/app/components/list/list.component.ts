@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
-import { SearchService } from '../search.service';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-list',
