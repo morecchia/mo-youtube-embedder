@@ -26,6 +26,11 @@ export class SearchService {
     this.videoSelected$.next(videoId);
   }
 
+  getRandomTerm(): string {
+    const terms = SearchService.termSelection;
+    return terms[Math.floor(Math.random() * terms.length)];
+  }
+
   private getIdFromLink(link: string) {
     const urlParts = link.split('?');
     const urlParams = new URLSearchParams(`?${urlParts[1]}`);
@@ -39,4 +44,38 @@ export class SearchService {
       return false;
     }
   }
+
+  private static termSelection = [
+    'stereolab',
+    'broadcast band',
+    'the gentle people',
+    'aphex twin',
+    'autechre',
+    'boards of canada',
+    'the orb',
+    'plaid idm',
+    'mouse on mars',
+    'lfo idm',
+    'seefeel',
+    'pan sonic',
+    'cabaret voltaire',
+    'rrose',
+    'katsunori sawa',
+    'khruangbin',
+    'afx',
+    'peder mannerfelt',
+    'bogdan raczynski',
+    'tolouse low trax',
+    'pole dub',
+    'tm404',
+    'boronko',
+    'oneohtrix point never',
+    'kiefer',
+    'Atom™',
+    'kp transmission',
+    'fanny kaplan',
+    'hainbach',
+    'vladislav delay',
+    'run the jewels',
+  ];
 }

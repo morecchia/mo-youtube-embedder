@@ -17,31 +17,14 @@ export class SearchComponent implements OnInit {
   constructor(private search: SearchService) {}
 
   ngOnInit() {
-    this.getVideos(this.randomTerm());
+    this.getVideos(this.search.getRandomTerm());
   }
 
   getVideos(term = '') {
-    this.search.searchVideos(term || this.term.value).subscribe();
-    this.term.reset();
-  }
-
-  private randomTerm(): string {
-    const termSelection = [
-      'stereolab',
-      'broadcast band',
-      'the gentle people',
-      'aphex twin',
-      'autechre',
-      'boards of canada',
-      'the orb',
-      'plaid idm',
-      'mouse on mars',
-      'lfo idm',
-      'seefeel',
-      'pan sonic',
-      'cabaret voltaire',
-    ];
-
-    return termSelection[Math.floor(Math.random() * termSelection.length)];
+    this.search.searchVideos(term || this.term.value).subscribe((res: unknown) => {
+      if (!Array.isArray(res)) {
+        this.term.reset();
+      }
+    });
   }
 }

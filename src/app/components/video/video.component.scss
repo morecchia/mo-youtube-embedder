@@ -20,7 +20,25 @@
   justify-content: flex-end;
   align-items: center;
   padding: 8px 0;
-  font-size: 20px;
+
+  a {
+    display: flex;
+    margin: 0 3px;
+    justify-content: flex-end;
+    align-items: center;
+    width: 28px;
+    height: 28px;
+  }
+
+  svg {
+    fill: #aaa;
+    width: 28px;
+    height: 28px;
+  }
+
+  svg:hover {
+    fill: #fafafa;
+}
 }
 
 .playing {

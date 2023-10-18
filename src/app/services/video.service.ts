@@ -7,12 +7,11 @@ const isRestricted = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 })
 export class VideoService {
   public YT: any;
-  public video: any;
+  public video: string;
   public reframed: boolean = false;
   public player: any;
 
   play(id: string) {
-    console.log(id);
     const origVideo = this.video;
     this.video = id;
 
@@ -26,9 +25,9 @@ export class VideoService {
       return;
     }
 
-    var tag = document.createElement('script');
+    const tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
-    var firstScriptTag = document.getElementsByTagName('script')[0];
+    const firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
     window['onYouTubeIframeAPIReady'] = () => this.startVideo();
@@ -74,6 +73,9 @@ export class VideoService {
         }
         break;
       case window['YT'].PlayerState.PAUSED:
+        if (!this.player.getCurrentTime || !this.player.getDuration) {
+          break;
+        }
         if (this.player.getDuration() - this.player.getCurrentTime() != 0) {
           console.log('paused' + ' @ ' + this.cleanTime());
         }
@@ -85,7 +87,9 @@ export class VideoService {
   }
 
   cleanTime() {
-    return Math.round(this.player.getCurrentTime());
+    return this.player.getCurrentTime
+      ? Math.round(this.player.getCurrentTime())
+      : 0;
   }
 
   onPlayerError(event) {
@@ -101,6 +105,8 @@ export class VideoService {
   }
 
   stop() {
-    this.player.pauseVideo();
+    if (this.player.pauseVideo) {
+      this.player.pauseVideo();
+    }
   }
 }
