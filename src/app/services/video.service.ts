@@ -12,6 +12,7 @@ export class VideoService {
   public player: any;
 
   play(id: string) {
+    console.log(id);
     const origVideo = this.video;
     this.video = id;
 

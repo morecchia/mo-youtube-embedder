@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule, FormControl} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 
 import { SearchService } from '../../services/search.service';
 
@@ -9,21 +9,20 @@ import { SearchService } from '../../services/search.service';
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
   term = new FormControl('');
 
-  constructor(private search: SearchService) { }
-  
+  constructor(private search: SearchService) {}
+
   ngOnInit() {
     this.getVideos(this.randomTerm());
   }
 
   getVideos(term = '') {
-    this.search
-      .searchVideos(term || this.term.value)
-      .subscribe(res => console.log(res));
+    this.search.searchVideos(term || this.term.value).subscribe();
+    this.term.reset();
   }
 
   private randomTerm(): string {
@@ -40,7 +39,7 @@ export class SearchComponent implements OnInit {
       'lfo idm',
       'seefeel',
       'pan sonic',
-      'cabaret voltaire'
+      'cabaret voltaire',
     ];
 
     return termSelection[Math.floor(Math.random() * termSelection.length)];

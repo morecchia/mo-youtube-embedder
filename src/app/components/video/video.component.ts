@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { VideoService } from '../../services/video.service';
-import { Serializer } from '@angular/compiler';
 import { SearchService } from '../../services/search.service';
 
 @Component({
