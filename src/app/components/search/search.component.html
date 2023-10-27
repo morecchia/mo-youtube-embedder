@@ -18,6 +18,7 @@
         id="videoSubmit"
         class="btn btn-primary"
         type="button"
+        [disabled]="!term.value"
         (click)="getVideos()">
         Search
       </button>

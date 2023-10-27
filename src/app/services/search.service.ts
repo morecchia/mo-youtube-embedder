@@ -18,6 +18,10 @@ export class SearchService {
     const directUrl = this.isUrl(keywords);
     const searchTerm = directUrl ? this.getVideoFromLink(keywords)?.id : keywords;
 
+    if (!searchTerm) {
+      return of({});
+    }
+
     return this.http.get<any[]>(`${environment.apiUrl}/search?term=${searchTerm}`)
         .pipe(map(list => {
             let results = {};
@@ -44,7 +48,8 @@ export class SearchService {
   private getVideoFromLink(link: string) {
     const urlParts = link.split('?');
     const urlParams = new URLSearchParams(`?${urlParts[1]}`);
-    return { id: urlParams.get('v') };
+    const id = urlParams.get('v');
+    return { id };
   }
 
   private isUrl(url: string) {
