@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 
 import { SearchService } from '../../services/search.service';
 import { VideoService } from 'src/app/services/video.service';
+import { Video } from 'src/app/models/video';
 
 @Component({
   selector: 'app-search',
@@ -14,7 +15,7 @@ import { VideoService } from 'src/app/services/video.service';
 })
 export class SearchComponent implements OnInit {
   term = new FormControl('');
-  selectedVideo: any;
+  selectedVideo: Video;
 
   constructor(private search: SearchService, private videoService: VideoService) {
     this.search.videoSelected$
@@ -28,11 +29,12 @@ export class SearchComponent implements OnInit {
   }
 
   getVideos(term = '') {
-    this.search.searchVideos(term || this.term.value).subscribe((res: unknown) => {
-      if (!Array.isArray(res)) {
-        this.term.reset();
-      }
-    });
+    this.search.searchVideos(term || this.term.value)
+      .subscribe((res: unknown) => {
+        if (!Array.isArray(res)) {
+          this.term.reset();
+        }
+      });
   }
 
   openSelectedVideo() {

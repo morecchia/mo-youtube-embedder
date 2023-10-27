@@ -1,29 +1,38 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, of, tap } from 'rxjs';
+import { BehaviorSubject, map, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Video } from '../models/video';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchService {
   videoList$ = new BehaviorSubject<any[]>([]);
-  videoSelected$ = new BehaviorSubject<any>(null);
-  videoToggled$ = new BehaviorSubject<any>(null);
+  videoSelected$ = new BehaviorSubject<Video>(null);
+  videoToggled$ = new BehaviorSubject<string>(null);
 
   constructor(private http: HttpClient) { }
 
   searchVideos(keywords: string) {
-    if (this.isUrl(keywords)) {
-      this.selectItem(this.getIdFromLink(keywords));
-      return of({})
-    } else {
-      return this.http.get<any[]>(`${environment.apiUrl}/search?term=${keywords}`)
-        .pipe(tap(list => this.videoList$.next(list.filter(i => i.channelTitle))));
-    }
+    const directUrl = this.isUrl(keywords);
+    const searchTerm = directUrl ? this.getVideoFromLink(keywords)?.id : keywords;
+
+    return this.http.get<any[]>(`${environment.apiUrl}/search?term=${searchTerm}`)
+        .pipe(map(list => {
+            let results = {};
+            if (directUrl) {
+              this.selectItem(list[0]);
+            } else {
+              this.videoList$.next(list.filter(i => i.channelTitle));
+              results = list;
+            }
+            return results;
+          })
+        );
   }
 
-  selectItem(video: any) {
+  selectItem(video: Video) {
     this.videoSelected$.next(video);
   }
 
@@ -32,10 +41,10 @@ export class SearchService {
     return terms[Math.floor(Math.random() * terms.length)];
   }
 
-  private getIdFromLink(link: string) {
+  private getVideoFromLink(link: string) {
     const urlParts = link.split('?');
     const urlParams = new URLSearchParams(`?${urlParts[1]}`);
-    return urlParams.get('v');
+    return { id: urlParams.get('v') };
   }
 
   private isUrl(url: string) {

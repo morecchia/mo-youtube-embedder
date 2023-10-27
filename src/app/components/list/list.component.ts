@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { SearchService } from '../../services/search.service';
+import { Video } from 'src/app/models/video';
 
 @Component({
   selector: 'app-list',
@@ -11,7 +12,7 @@ import { SearchService } from '../../services/search.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent {
-  videos$!: Observable<any[]>;
+  videos$!: Observable<Video[]>;
 
   constructor(private searchService: SearchService) {
     this.videos$ = this.searchService.videoList$;
