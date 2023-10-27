@@ -13,7 +13,9 @@ import { SearchService } from '../../services/search.service';
 export class VideoComponent implements OnInit {
   videoId: string;
 
-  constructor(private videoService: VideoService, private searchService: SearchService) { }
+  constructor(private videoService: VideoService, private searchService: SearchService) {
+    this.videoId = videoService.video;
+  }
 
   ngOnInit() {
     this.searchService.videoSelected$
@@ -22,6 +24,10 @@ export class VideoComponent implements OnInit {
         if (this.videoId) {
           this.videoService.play(this.videoId);
         }
+      })
+    this.searchService.videoToggled$
+      .subscribe(videoId => {
+        this.videoId = videoId;
       })
   }
 

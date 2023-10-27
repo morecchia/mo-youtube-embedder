@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 export class SearchService {
   videoList$ = new BehaviorSubject<any[]>([]);
   videoSelected$ = new BehaviorSubject<any>(null);
+  videoToggled$ = new BehaviorSubject<any>(null);
 
   constructor(private http: HttpClient) { }
 

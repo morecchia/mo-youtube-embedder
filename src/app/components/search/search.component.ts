@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 
 import { SearchService } from '../../services/search.service';
+import { VideoService } from 'src/app/services/video.service';
 
 @Component({
   selector: 'app-search',
@@ -15,7 +16,7 @@ export class SearchComponent implements OnInit {
   term = new FormControl('');
   selectedVideo: any;
 
-  constructor(private search: SearchService) {
+  constructor(private search: SearchService, private videoService: VideoService) {
     this.search.videoSelected$
       .subscribe(video => {
         this.selectedVideo = video;
@@ -35,6 +36,6 @@ export class SearchComponent implements OnInit {
   }
 
   openSelectedVideo() {
-    this.search.selectItem(this.selectedVideo);
+    this.search.videoToggled$.next(this.selectedVideo.id);
   }
 }
