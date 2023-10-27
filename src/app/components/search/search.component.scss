@@ -9,3 +9,22 @@
 .row > * {
   padding: 0;
 }
+
+.current-video {
+  display: flex;
+  justify-content: flex-end;
+  margin: 1em 0;
+  color: #b9b9b9;
+  font-weight: 500;
+  font-size: .9em;
+
+  .video-title {
+    cursor: pointer;
+    color: #e9e9e9;
+    font-weight: normal;
+  }
+
+  .video-title:hover {
+    text-decoration: underline;
+  }
+}

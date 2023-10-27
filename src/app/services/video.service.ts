@@ -6,10 +6,10 @@ const isRestricted = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   providedIn: 'root',
 })
 export class VideoService {
-  public YT: any;
-  public video: string;
-  public reframed: boolean = false;
-  public player: any;
+  YT: any;
+  video: string;
+  reframed: boolean = false;
+  player: any;
 
   play(id: string) {
     const origVideo = this.video;
@@ -53,7 +53,7 @@ export class VideoService {
   }
 
   /* 4. It will be called when the Video Player is ready */
-  onPlayerReady(event) {
+  onPlayerReady(event: any) {
     if (isRestricted) {
       event.target.mute();
       event.target.playVideo();
@@ -63,20 +63,24 @@ export class VideoService {
   }
 
   /* 5. API will call this function when Player State changes like PLAYING, PAUSED, ENDED */
-  onPlayerStateChange(event) {
+  onPlayerStateChange(event: any) {
     switch (event.data) {
       case window['YT'].PlayerState.PLAYING:
-        if (this.cleanTime() == 0) {
+        const time = this?.cleanTime();
+        if (time == null) {
+          return;
+        }
+        if (time === 0) {
           console.log('started ' + this.cleanTime());
         } else {
           console.log('playing ' + this.cleanTime());
         }
         break;
       case window['YT'].PlayerState.PAUSED:
-        if (!this.player.getCurrentTime || !this.player.getDuration) {
+        if (!this.player?.getCurrentTime || !this.player?.getDuration) {
           break;
         }
-        if (this.player.getDuration() - this.player.getCurrentTime() != 0) {
+        if (this.player?.getDuration() - this.player?.getCurrentTime() != 0) {
           console.log('paused' + ' @ ' + this.cleanTime());
         }
         break;
@@ -87,25 +91,16 @@ export class VideoService {
   }
 
   cleanTime() {
-    return this.player.getCurrentTime
-      ? Math.round(this.player.getCurrentTime())
-      : 0;
+    const currentTime = this.player && this.player.getCurrentTime();
+    return currentTime ? Math.round(this.player?.getCurrentTime()) : 0;
   }
 
   onPlayerError(event) {
-    switch (event.data) {
-      case 2:
-        console.log('' + this.video);
-        break;
-      case 100:
-        break;
-      case 101 || 150:
-        break;
-    }
+    console.error(event);
   }
 
   stop() {
-    if (this.player.pauseVideo) {
+    if (this.player?.pauseVideo) {
       this.player.pauseVideo();
     }
   }

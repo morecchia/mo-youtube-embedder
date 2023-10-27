@@ -18,6 +18,6 @@ export class ListComponent {
   }
 
   selectVideo(video: any) {
-    this.searchService.selectItem(video.id);
+    this.searchService.selectItem(video);
   }
 }

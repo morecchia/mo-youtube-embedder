@@ -17,8 +17,8 @@ export class VideoComponent implements OnInit {
 
   ngOnInit() {
     this.searchService.videoSelected$
-      .subscribe(id => {
-        this.videoId = id;
+      .subscribe(video => {
+        this.videoId = video?.id;
         if (this.videoId) {
           this.videoService.play(this.videoId);
         }
@@ -26,7 +26,7 @@ export class VideoComponent implements OnInit {
   }
 
   closePlayer() {
-    this.videoId = null;
+    this.searchService.videoSelected$.next(null);
     this.videoService.stop();
   }
 

@@ -13,8 +13,14 @@ import { SearchService } from '../../services/search.service';
 })
 export class SearchComponent implements OnInit {
   term = new FormControl('');
+  selectedVideo: any;
 
-  constructor(private search: SearchService) {}
+  constructor(private search: SearchService) {
+    this.search.videoSelected$
+      .subscribe(video => {
+        this.selectedVideo = video;
+      });
+  }
 
   ngOnInit() {
     this.getVideos(this.search.getRandomTerm());
@@ -26,5 +32,9 @@ export class SearchComponent implements OnInit {
         this.term.reset();
       }
     });
+  }
+
+  openSelectedVideo() {
+    this.search.selectItem(this.selectedVideo);
   }
 }

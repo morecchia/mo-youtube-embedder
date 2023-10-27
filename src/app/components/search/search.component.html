@@ -1,5 +1,11 @@
 <div class="wrapper">
   <div class="row w-75">
+    <div class="current-video" *ngIf="selectedVideo">
+      <span>Playing:&nbsp;</span>
+      <span class="video-title" (click)="openSelectedVideo()">{{selectedVideo.title}}</span>
+    </div>
+  </div>
+  <div class="row w-75">
     <div class="search-container">
       <input
         id="searchTerm"

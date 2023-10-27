@@ -22,8 +22,8 @@ export class SearchService {
     }
   }
 
-  selectItem(videoId: string) {
-    this.videoSelected$.next(videoId);
+  selectItem(video: any) {
+    this.videoSelected$.next(video);
   }
 
   getRandomTerm(): string {
@@ -73,7 +73,7 @@ export class SearchService {
     'kiefer',
     'Atom™',
     'kp transmission',
-    'fanny kaplan',
+    'fanny kaplan band',
     'hainbach',
     'vladislav delay',
     'run the jewels',
