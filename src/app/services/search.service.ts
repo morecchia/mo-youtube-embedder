@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, map, of, tap } from 'rxjs';
+import { BehaviorSubject, Observable, map, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Video } from '../models/video';
 
@@ -34,6 +34,21 @@ export class SearchService {
             return results;
           })
         );
+  }
+
+  getDescription(video: Video): Observable<any> {
+    if (!video) {
+      return of({});
+    }
+    
+    return this.http.get<any>(`${environment.apiUrl}/description/${video.id}`)
+      .pipe(map(res => {
+        return {
+          id: video.id,
+          owner: video.channelTitle,
+          ...res
+        }
+      }));
   }
 
   selectItem(video: Video) {
