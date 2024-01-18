@@ -12,13 +12,17 @@ export class SearchService {
   videoSelected$ = new BehaviorSubject<Video>(null);
   videoToggled$ = new BehaviorSubject<string>(null);
 
+  searching: boolean;
+
   constructor(private http: HttpClient) { }
 
   searchVideos(keywords: string) {
     const directUrl = this.isUrl(keywords);
     const searchTerm = directUrl ? this.getVideoFromLink(keywords)?.id : keywords;
+    this.searching = true;
 
     if (!searchTerm) {
+      this.searching = false;
       return of({});
     }
 
@@ -31,6 +35,7 @@ export class SearchService {
               this.videoList$.next(list.filter(i => i.channelTitle));
               results = list;
             }
+            this.searching = false;
             return results;
           })
         );

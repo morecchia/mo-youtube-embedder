@@ -14,6 +14,8 @@ import { Video } from 'src/app/models/video';
 export class ListComponent {
   videos$!: Observable<Video[]>;
 
+  get searching(): boolean { return this.searchService.searching; }
+  
   constructor(private searchService: SearchService) {
     this.videos$ = this.searchService.videoList$;
   }

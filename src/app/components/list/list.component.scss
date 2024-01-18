@@ -1,3 +1,7 @@
+.wrapper {
+  position: relative;
+}
+
 li {
   cursor: pointer;
 }
@@ -10,4 +14,11 @@ img {
   max-width: 120px;
   min-height: 80px;
   margin-right: 1em;
+}
+
+.spinner-container {
+  position: absolute;
+  top: 20px;
+  display: flex;
+  justify-content: center;
 }
